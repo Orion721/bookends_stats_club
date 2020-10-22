@@ -133,4 +133,5 @@ class Teams:
         df.index += 1
         return df
 
+print(Teams().teams())
 print(len(Teams().team_location()), len(Teams().team_state()), len(Teams().team_region()))
