@@ -59,23 +59,22 @@ class Teams:
         teams[144] = teams[144][:-1]
         teams[158] = 'Birdfruit'
         teams[160] = 'Riot'
+        teams[168] = 'Freaks'
         teams[203] = 'DiG'
         teams[205] = 'Mesteño'
         teams[213] = 'Condors'
-        teams[216] = 'CLE Smokestack'
         teams[223] = teams[223][:-3] + teams[223][-1]
         teams[238] = 'Temper'
+        teams[239] = 'Floodwall'
         teams[252] = 'Revolution'
+        teams[257] = 'Ivy'
         teams[262] = 'Rhino Slam!'
+        teams[299] = 'Smokestack'
         return teams
     
     def clean_teams_divisions_dict(self):
         clean_teams_divisions_dict = dict(zip(self.teams_divisions_dict_cleanup(), self.teams_divisions_dict().values()))
         return clean_teams_divisions_dict
-    
-    def nulls(self):
-        null = [0] * len(self.clean_teams_divisions_dict())
-        return null
     
     def team_location(self):
         team_location = ['Boston', 'New Haven', 'Atlanta', 'Minneapolis', 'Ames', 'San Francisco', 'San Francisco', 'Ann Arbor', 'Philadelphia', 'Los Angeles', 'Tucson', 'Dallas', 'Montréal', 'Triangle Area', 'Houston', 'Iowa City', 
@@ -90,48 +89,90 @@ class Teams:
         'Princeton', 'Salt Lake City', 'Québec', 'Los Angeles', 'Dallas', 'Columbus', 'Mianus', 'Seattle', 'Chicago', 'Charleston', 'San Diego', 'Charlotte', 'Chattanooga', 'Orlando', 'Denver', 'San Luis Obispo',
         'Huntsville', 'Houston', 'Pine Apple', 'Birmingham', 'Houston', 'Baltimore', 'Austin', 'Baton Rouge', 'Saint Paul', 'Memphis', 'Fayetteville', 'Tulsa', 'Kansas City', 'Houston', 'Chicago', 'New Orleans',
         'Melbourne', 'London', 'Berlin', 'Winnipeg', 'Pittsburgh', 'Princeton', 'Seattle', 'Indianapolis', 'Cleveland', 'Lombard', 'Milwaukee', 'Toronto', 'Denver', 'Fort Collins', 'Dallas', 'Minneapolis',
-        'Gainesville', 'Boston', 'Chico', 'Oakland', 'Iowa City', 'Mansfield', 'Ben Avon', 'San Francisco', 'Indianapolis', 'New York']
+        'Gainesville', 'Boston', 'Chico', 'Oakland', 'Iowa City', 'Mansfield', 'Ben Avon', 'San Francisco', 'Indianapolis', 'New York', 'Chicago', 'Somerville', 'Kansas City', 'Atlanta', 'Washington DC',
+        'Salt Lake City', 'New York', 'Minneapolis', 'Bucaramanga', 'Panamá', 'Durham', 'Winnipeg', 'Cajicá', 'Boston', 'Seattle', 'West Chester', 'Phoenix', 'Durham', 'St Louis', 'Columbus', 'Baltimore',
+        'Kitchener', 'Richmond', 'Madison', 'Dayton', 'Ottawa', 'Birmingham', 'Cleveland', 'Tucson', 'Indianapolis', 'Matsumoto', 'Bogotá', 'Tokyo', 'Ciudad de Mexico', 'Bologna', 'Toyota', 'Boston',
+        'Boise', 'Montréal', 'Portland', 'Boston', 'Washington DC', 'New York', 'Portland', 'Oakland', 'Washington DC', 'San Francisco', 'Bozeman', 'Seattle', 'Iowa City', 'Eugene', 'Dallas',
+        'St Louis', 'Boise', 'San Marcos', 'Orem', 'Vancouver', 'Seattle', 'Chicago', 'Minneapolis', 'Darmstadt', 'Tokyo', 'Tokyo', 'London', 'Osaka', 'Southeast Asia', 'West Chester', 'Florida',
+        'Chicago', 'Madison', 'Halifax', 'Lombard', 'Montana', 'Asheville', 'Omaha', 'Milwaukee', 'Atlanta', 'Frederick', 'Ann Arbor', 'Durham', 'Philadelphia', 'Ferndale', 'Tampa Bay', 'Halifax', 
+        'Richmond', 'Tokyo', 'Tokyo', 'Edogawa', 'Bogotá', 'Bogotá', 'Darmstadt']
         return team_location
 
     def team_state(self):
-        team_state = ['Massachussets', 'Connecticut', 'Georgia', 'Minnesota', 'Iowa', 'California', 'California', 'Michigan', 'Pennsylvania', 'California', 'Arizona', 'Texas', 'Quebec', 'North Carolina', 'Texas', 'Iowa', 
-        'Massachussets', 'California', 'Texas', 'Georgia', 'Washington DC', 'Washington', 'Colorado', 'New York', 'Illinois', 'Pennsylvania', 'North Carolina', 'Streetgang', 'British Columbia', 'Wisconsin', 'Ohio', 'Tennessee', 
-        'Washington', 'California', 'Massachussets', 'Ontario', 'Washington DC', 'British Columbia', 'North Carolina', 'Colorado', 'Texas', 'Illinois', 'Minnesota', 'New York', 'California', 'Georgia', 'Quebec', 'Missouri', 'Massachussets',
+        team_state = ['Massachusetts', 'Connecticut', 'Georgia', 'Minnesota', 'Iowa', 'California', 'California', 'Michigan', 'Pennsylvania', 'California', 'Arizona', 'Texas', 'Quebec', 'North Carolina', 'Texas', 'Iowa', 
+        'Massachusetts', 'California', 'Texas', 'Georgia', 'Washington DC', 'Washington', 'Colorado', 'New York', 'Illinois', 'Pennsylvania', 'North Carolina', 'Streetgang', 'British Columbia', 'Wisconsin', 'Ohio', 'Tennessee', 
+        'Washington', 'California', 'Massachusetts', 'Ontario', 'Washington DC', 'British Columbia', 'North Carolina', 'Colorado', 'Texas', 'Illinois', 'Minnesota', 'New York', 'California', 'Georgia', 'Quebec', 'Missouri', 'Massachusetts',
         'Oregon', 'California', 'California', 'New Jersey', 'Florida', 'Colorado', 'Florida', 'Ontario', 'Minnesota', 'Philadelphia', 'California', 'Oregon', 'Tennessee', 'Quebec', 'California', 'Montana', 
-        'Massachussets', 'Texas', 'Oregon', 'California', 'Wisconsin', 'Nightlock', 'Oregon', 'Washington', 'Philadelphia', 'Colombia', 'Utah', 'Colombia', 'Colorado', 'Colombia', 'North Carolina', 'Washington',
+        'Massachusetts', 'Texas', 'Oregon', 'California', 'Wisconsin', 'Nightlock', 'Oregon', 'Washington', 'Philadelphia', 'Colombia', 'Utah', 'Colombia', 'Colorado', 'Colombia', 'North Carolina', 'Washington',
         'Texas', 'Missouri', 'Illinois', 'Florida', 'Maryland', 'Colorado', 'Pennsylvania', 'Washington DC', 'California', 'North Carolina', 'Colorado', 'Washington', 'Oregon', 'Ohio', 'Minnesota', 
-        'Washington DC', 'California', 'Japan', 'New York', 'Quebec', 'Colombia', 'Denmark', 'Quebec', 'Japan', 'Colombia', 'Ohio', 'Massachussets', 'Wisconsin', 'Minnesota', 'Massachussets', 'Arkansas', 
-        'Michigan', 'Massachussets', 'Florida', 'Pennsylvania', 'California', 'Massachussets', 'British Columbia', 'Tennessee', 'Washington', 'Oregon', 'Pennsylvania', 'Florida', 'New York', 'Pennsylvania', 'Illinois',
+        'Washington DC', 'California', 'Japan', 'New York', 'Quebec', 'Colombia', 'Denmark', 'Quebec', 'Japan', 'Colombia', 'Ohio', 'Massachusetts', 'Wisconsin', 'Minnesota', 'Massachusetts', 'Arkansas', 
+        'Michigan', 'Massachusetts', 'Florida', 'Pennsylvania', 'California', 'Massachusetts', 'British Columbia', 'Tennessee', 'Washington', 'Oregon', 'Pennsylvania', 'Florida', 'New York', 'Pennsylvania', 'Illinois',
         'Maryland', 'Ontario', 'Colombia', 'Great Britain', 'Colombia', 'Great Britain', 'Colombia', 'Missouri', 'Iowa', 'Illinois', 'Illinois', 'Virginia', 'Maine', 'Pennsylvania', 'Arizona',
         'New Jersey', 'Utah', 'Quebec', 'California', 'Texas', 'Ohio', 'Connecticut', 'Washington', 'Illinois', 'South Carolina', 'California', 'North Carolina', 'Tennessee', 'Florida', 'Colorado', 'California',
         'Alabama', 'Texas', 'Alabama', 'Alabama', 'Texas', 'Maryland', 'Texas', 'Louisiana', 'Minnesota', 'Tennessee', 'Arkansas', 'Oklahoma', 'Kansas', 'Texas', 'Illinois', 'Louisiana',
         'Australia', 'Great Britain', 'Germany', 'Manitoba', 'Pennsylvania', 'New Jersey', 'Washington', 'Indiana', 'Ohio', 'Illinois', 'Wisconsin', 'Ontario', 'Colorado', 'Colorado', 'Texas', 'Minnesota',
-        'Florida', 'Massachussets', 'California', 'California', 'Iowa', 'Massachussets', 'Pennsylvania', 'California', 'Indiana', 'New York']
+        'Florida', 'Massachusetts', 'California', 'California', 'Iowa', 'Massachusetts', 'Pennsylvania', 'California', 'Indiana', 'New York', 'Illinois', 'Massachusetts', 'Kansas', 'Georgia', 'Washington DC',
+        'Utah', 'New York', 'Minnesota', 'Colombia', 'Panamá', 'North Carolina', 'Manitoba', 'Colombia', 'Massachusetts', 'Washington', 'Pennsylvania', 'Arizona', 'North Carolina', 'Missouri', 'Ohio', 'Maryland',
+        'Ontario', 'Virginia', 'Wisconsin', 'Ohio', 'Ontario', 'Alabama', 'Ohio', 'Arizona', 'Indiana', 'Japan', 'Colombia', 'Japan', 'Mexico', 'Italy', 'Japan', 'Massachusetts',
+        'Idaho', 'Quebec', 'Oregon', 'Massachusetts', 'Washington DC', 'New York', 'Oregon', 'California', 'Washington DC', 'California', 'Montana', 'Washington', 'Iowa', 'Oregon', 'Texas',
+        'Missouri', 'Idaho', 'Texas', 'Utah', 'British Columbia', 'Washington', 'Illinois', 'Minnesota', 'Germany', 'Japan', 'Japan', 'Great Britain', 'Japan', 'Southeast Asia', 'Pennsylvania', 'Florida',
+        'Illinois', 'Wisconsin', 'Nova Scotia', 'Illinois', 'Montana', 'North Carolina', 'Nebraska', 'Wisconsin', 'Georgia', 'Maryland', 'Michigan', 'North Carolina', 'Pennsylvania', 'Michigan', 'Florida', 'Nova Scotia', 
+        'Virginia', 'Japan', 'Japan', 'Japan', 'Colombia', 'Colombia', 'Germany']
         return team_state
 
     def team_region(self):
-        team_region = ['Northeast', 'Northeast', 'Southeast', 'North Central', 'North Central', 'Southwest', 'Southwest', 'Great Lakes', 'Mid Atlantic', 'Southwest', 'Southwest', 'South Central', 'Northeast', 'Southeast', 'South Central', 'North Central', 
-        'Northeast', 'Southwest', 'South Central', 'Southeast', 'Mid Atlantic', 'Northwest', 'South Central', 'Northeast', 'Great Lakes', 'Mid Atlantic', 'Southeast', 'Southwest', 'Northwest', 'North Central', 'Great Lakes', 'Southeast',
-        'Northwest', 'Southwest', 'Northeast', 'Northeast', 'Mid Atlantic', 'Northeast', 'Southeast', 'South Central', 'South Central', 'Great Lakes', 'North Central', 'Northeast', 'Southwest', 'Southeast', 'Northeast', 'North Central', 'Northeast',
-        'Northwest', 'Southwest', 'Southwest', 'Mid Atlantic', 'Southeast', 'South Central', 'Southeast', 'Northeast', 'North Central', 'Mid Atlantic', 'Southwest', 'Northwest', 'Southeast', 'Northeast', 'Southwest', 'Northwest', 
-        'Northeast', 'South Central', 'Northwest', 'Southwest', 'North Central', 'Southwest', 'Northwest', 'Northwest', 'Mid Atlantic', 'International', 'Northwest', 'International', 'South Central', 'International', 'Southeast', 'Northwest',
-        'South Central', 'North Central', 'Great Lakes', 'Southeast', 'Mid Atlantic', 'South Central', 'Mid Atlantic', 'Mid Atlantic', 'Southwest', 'Southeast', 'South Central', 'Northwest', 'Northwest', 'Great Lakes', 'North Central', 
-        'Mid Atlantic', 'Southwest', 'International', 'Northeast', 'Northeast', 'International', 'International', 'Northeast', 'International', 'International', 'Great Lakes', 'Northeast', 'North Central', 'North Central', 'Northeast', 'South Central', 
-        'Great Lakes', 'Northeast', 'Southeast', 'Mid Atlantic', 'Southwest', 'Northeast', 'Northwest', 'Southeast', 'Northwest', 'Northwest', 'Mid Atlantic', 'Southeast', 'Northeast', 'Mid Atlantic', 'Great Lakes',
-        'Mid Atlantic', 'Northeast', 'International', 'International', 'International', 'International', 'International', 'North Central', 'North Central', 'Great Lakes', 'Great Lakes', 'Mid Atlantic', 'Northeast', 'Mid Atlantic', 'Southwest',
-        'Mid Atlantic', 'Northwest', 'Northeast', 'Southwest', 'South Central', 'Great Lakes', 'Northeast', 'Northwest', 'Great Lakes', 'Southeast', 'Southwest', 'Southeast', 'Southeast', 'Southeast', 'South Central', 'Southwest',
-        'Southeast', 'South Central', 'Southeast', 'Southeast', 'South Central', 'Mid Atlantic', 'South Central', 'Southeast', 'North Central', 'Southeast', 'South Central', 'South Central', 'North Central', 'South Central', 'Great Lakes', 'Southeast',
-        'International', 'International', 'International', 'International', 'Mid Atlantic', 'Mid Atlantic', 'Northwest', 'Great Lakes', 'Great Lakes', 'Great Lakes', 'North Central', 'Northeast', 'South Central', 'South Central', 'South Central', 'North Central',
-        'Southeast', 'Northeast', 'Southwest', 'Southwest', 'North Central', 'Northeast', 'Mid Atlantic', 'Southwest', 'Great Lakes', 'Northeast']
-        return team_region
+        team_region = ['Northeast', 'Northeast', 'Southeast', 'North Central', 'North Central', 'Southwest', 'Southwest', 'Great Lakes', 'Mid-Atlantic', 'Southwest', 'Southwest', 'South Central', 'Northeast', 'Southeast', 'South Central', 'North Central', 
+        'Northeast', 'Southwest', 'South Central', 'Southeast', 'Mid-Atlantic', 'Northwest', 'South Central', 'Northeast', 'Great Lakes', 'Mid-Atlantic', 'Southeast', 'Southwest', 'Northwest', 'North Central', 'Great Lakes', 'Southeast',
+        'Northwest', 'Southwest', 'Northeast', 'Northeast', 'Mid-Atlantic', 'Northeast', 'Southeast', 'South Central', 'South Central', 'Great Lakes', 'North Central', 'Northeast', 'Southwest', 'Southeast', 'Northeast', 'North Central', 'Northeast',
+        'Northwest', 'Southwest', 'Southwest', 'Mid-Atlantic', 'Southeast', 'South Central', 'Southeast', 'Northeast', 'North Central', 'Mid-Atlantic', 'Southwest', 'Northwest', 'Southeast', 'Northeast', 'Southwest', 'Northwest', 
+        'Northeast', 'South Central', 'Northwest', 'Southwest', 'North Central', 'Southwest', 'Northwest', 'Northwest', 'Mid-Atlantic', 'International', 'Northwest', 'International', 'South Central', 'International', 'Southeast', 'Northwest',
+        'South Central', 'North Central', 'Great Lakes', 'Southeast', 'Mid-Atlantic', 'South Central', 'Mid-Atlantic', 'Mid-Atlantic', 'Southwest', 'Southeast', 'South Central', 'Northwest', 'Northwest', 'Great Lakes', 'North Central', 
+        'Mid-Atlantic', 'Southwest', 'International', 'Northeast', 'Northeast', 'International', 'International', 'Northeast', 'International', 'International', 'Great Lakes', 'Northeast', 'North Central', 'North Central', 'Northeast', 'South Central', 
+        'Great Lakes', 'Northeast', 'Southeast', 'Mid-Atlantic', 'Southwest', 'Northeast', 'Northwest', 'Southeast', 'Northwest', 'Northwest', 'Mid-Atlantic', 'Southeast', 'Northeast', 'Mid-Atlantic', 'Great Lakes',
+        'Mid-Atlantic', 'Northeast', 'International', 'International', 'International', 'International', 'International', 'North Central', 'North Central', 'Great Lakes', 'Great Lakes', 'Mid-Atlantic', 'Northeast', 'Mid-Atlantic', 'Southwest',
+        'Mid-Atlantic', 'Northwest', 'Northeast', 'Southwest', 'South Central', 'Great Lakes', 'Northeast', 'Northwest', 'Great Lakes', 'Southeast', 'Southwest', 'Southeast', 'Southeast', 'Southeast', 'South Central', 'Southwest',
+        'Southeast', 'South Central', 'Southeast', 'Southeast', 'South Central', 'Mid-Atlantic', 'South Central', 'Southeast', 'North Central', 'Southeast', 'South Central', 'South Central', 'North Central', 'South Central', 'Great Lakes', 'Southeast',
+        'International', 'International', 'International', 'North Central', 'Mid-Atlantic', 'Mid-Atlantic', 'Northwest', 'Great Lakes', 'Great Lakes', 'Great Lakes', 'North Central', 'Northeast', 'South Central', 'South Central', 'South Central', 'North Central',
+        'Southeast', 'Northeast', 'Southwest', 'Southwest', 'North Central', 'Northeast', 'Mid-Atlantic', 'Southwest', 'Great Lakes', 'Northeast', 'Great Lakes', 'Northeast', 'North Central', 'Southeast', 'Mid-Atlantic',
+        'Northwest', 'Northeast', 'North Central', 'International', 'International', 'Southeast', 'North Central', 'International', 'Northeast', 'Northwest', 'Mid-Atlantic', 'Southwest', 'Southeast', 'North Central', 'Great Lakes', 'Mid-Atlantic',
+        'Northeast', 'Mid-Atlantic', 'North Central', 'Great Lakes', 'Northeast', 'Southeast', 'Great Lakes', 'Southwest', 'Great Lakes', 'International', 'International', 'International', 'International', 'International', 'International', 'Northeast',
+        'Northwest', 'Northeast', 'Northwest', 'Northeast', 'Mid-Atlantic', 'Northeast', 'Northwest', 'Southwest', 'Mid-Atlantic', 'Southwest', 'Northwest', 'Northwest', 'North Central', 'Northwest', 'South Central',
+        'North Central', 'Northwest', 'South Central', 'Northwest', 'Northwest', 'Northwest', 'Great Lakes', 'North Central', 'International', 'International', 'International', 'International', 'International', 'International', 'Mid-Atlantic', 'Southeast',
+        'Great Lakes', 'North Central', 'Northeast', 'Great Lakes', 'Northwest', 'Southeast', 'North Central', 'North Central', 'Southeast', 'Mid-Atlantic', 'Great Lakes', 'Southeast', 'Mid-Atlantic', 'Great Lakes', 'Southeast', 'Northeast', 
+        'Mid-Atlantic', 'International', 'International', 'International', 'International', 'International', 'International']
+        region_ids = []
+        for region in team_region:
+            if region == 'Great Lakes':
+                region_ids.extend([1])
+            elif region == 'Mid-Atlantic':
+                region_ids.extend([2])
+            elif region == 'North Central':
+                region_ids.extend([3])
+            elif region == 'Northeast':
+                region_ids.extend([4])
+            elif region == 'Northwest':
+                region_ids.extend([5])
+            elif region == 'South Central':
+                region_ids.extend([6])
+            elif region == 'Southeast':
+                region_ids.extend([7])
+            elif region == 'Southwest':
+                region_ids.extend([8])
+            elif region == 'International':
+                region_ids.extend([9])
+        return region_ids
+    
+    def region_df(self):
+        unique_regions = ['Great Lakes', 'Mid-Atlantic', 'North Central', 'Northeast', 'Northwest', 'South Central', 'Southeast', 'Southwest', 'International']
+        region_columns = {'region': unique_regions}
+        region_df = pd.DataFrame(data=region_columns)
+        region_df.index += 1
+        return region_df
 
     def teams_dataframe(self):
         team_names = [*self.clean_teams_divisions_dict()]
         team_divisions = list(self.clean_teams_divisions_dict().values())
-        teams_columns = {'team_name': team_names, 'team_location': self.nulls(), 'team_state': self.nulls(), 'division_id': team_divisions, 'region_id': self.nulls()}
+        teams_columns = {'team_name': team_names, 'team_location': self.team_location(), 'team_state': self.team_state(), 'division_id': team_divisions, 'region_id': self.team_region()}
         df = pd.DataFrame(data=teams_columns)
         df.index += 1
         return df
-
-print(Teams().teams())
-print(len(Teams().team_location()), len(Teams().team_state()), len(Teams().team_region()))

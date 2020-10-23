@@ -20,8 +20,8 @@ class Team_Team_Events:
                         'Club Deportivo Revolution': 'Revolution', 'MesteÃ±o': 'Mesteño', 'SoCal Condors': 
                         'Condors', 'American BBQ': 'American Barbecue', 'Boost Mobile': 'Boost FC', 'Kie': 'K.ie', 
                         'The DOH Abides': "D'oh! Abides", '7Express': '7 Express', 'Seattle Mixed': 'Seattle Mixtape', 
-                        'Pittsburgh Temper': 'Temper', 'BirdFruit': 'Birdfruit', 'SmokeStack': 'CLE Smokestack', 
-                        'Bent': 'BENT', 'Rhino Slam': 'Rhino Slam!'}
+                        'Pittsburgh Temper': 'Temper', 'BirdFruit': 'Birdfruit', 'Richmond Floodwall': 'Floodwall',
+                        'Bent': 'BENT', 'Rhino Slam': 'Rhino Slam!', 'Portland Ivy': 'Ivy', 'Freaks Uv Nature': 'Freaks', 'CLE Smokestack': 'Smokestack'}
         clean_teams = [team_cleaner.get(x,x) for x in teams_raw]
         return clean_teams
 
