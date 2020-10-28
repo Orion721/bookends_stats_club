@@ -13,7 +13,7 @@ Scraping Ultiarchive for club ultimate frisbee stats
 This is a passion project to pull ultimate frisbee data from Ultiarchive.com and store it in a database.
 The focus for this particular project is for the club division's regular season Triple Crown Tour events including postseason Nationals.
 Eventually, there will be room to expand the project to include the college division and the full postseason series.
-The end goal is to learn more about data transformation, data storage and eventually building a webapp connected to a databse.
+The end goal is to learn more about data transformation, data storage and eventually building a webapp connected to a database.
 
 ## Technologies
 * Python - version 3.6
