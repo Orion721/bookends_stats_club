@@ -1,0 +1,117 @@
+Instructions to view model:
+
+Step 1: Visit https://dbdiagram.io/home
+Step 2: Copy and paste schema below into text box on the left side of the interface
+
+Table event_types {
+  event_type_id int [pk, increment] // auto-increment
+  event_name varchar
+}
+
+Table division {
+  division_id int [pk, increment]
+  division varchar
+ }
+ 
+Table regions {
+  region_id int [pk, increment]
+  region varchar
+}
+
+Table events {
+  event_id int [pk, increment]
+  event_type_id int [ref: > event_types.event_type_id]
+  city varchar
+  state varchar
+}
+
+Table event_day_days {
+  event_day_id int [pk, increment, ref: > event_days.event_day_id]
+  event_id int [ref: > events.event_id]
+}
+
+Table event_days {
+  event_day_id int [pk, increment]
+  event_day_date date
+  max_temp decimal
+  max_wind decimal
+  precip decimal
+  max_hum decimal
+  max_dew_point decimal
+}
+
+Table teams {
+  team_id int [pk, increment]
+  team_name varchar
+  team_location varchar
+  team_state varchar
+  division_id int [ref: > division.division_id]
+  region_id int [ref: > regions.region_id]
+}
+
+Table team_event_events {
+  team_event_id int [pk, ref: > team_events.team_event_id]
+  event_id int [ref: > events.event_id]
+}
+
+Table team_events {
+  team_event_id int [pk, increment]
+  seed int
+  result int
+  seed_diff int
+  spirit decimal
+  games_played int
+  wins int
+  losses int
+}
+
+table team_team_events {
+  team_event_id int [ref: > team_events.team_event_id]
+  team_id int [ref: > teams.team_id]
+}
+
+Table team_event_event_pools {
+  event_pool_id int [ref: > event_pools.event_pool_id]
+  team_event_id int [ref: > team_events.team_event_id]  
+}
+
+Table event_pools {
+  event_pool_id int [pk, increment]
+  pool varchar
+  pool_start int
+  pool_finish int
+  pool_wins int
+  pool_losses int
+}
+
+Table pool_games {
+  pool_game_id int [pk, increment]
+  event_day_id int [ref: > event_days.event_day_id]
+  game_time timestamp
+  first_event_pool_id int [ref: > event_pools.event_pool_id]
+  first_team_score int
+  second_event_pool_id int [ref: > event_pools.event_pool_id]
+  second_team_score int
+}
+
+Table bracket_types {
+  bracket_type_id int [pk, increment]
+  bracket_type string
+}
+
+Table bracket_game_types {
+  bracket_game_type_id int [pk, increment]
+  bracket_game_type string
+}
+
+Table bracket_games {
+  bracket_game_id int [pk, increment]
+  bracket_type_id int [ref: > bracket_types.bracket_type_id]
+  bracket_game_type_id int [ref: > bracket_game_types.bracket_game_type_id]
+  event_day_id int [ref: > event_days.event_day_id]
+  game_time datetime
+  first_team_event_id int [ref: > team_events.team_event_id]
+  first_team_score int
+  second_team_event_id int [ref: > team_events.team_event_id]
+  second_team_score int
+}
