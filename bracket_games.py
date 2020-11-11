@@ -3,6 +3,7 @@ from team_events import Team_Events
 from event_day_connector import Event_Day_Converter
 import pandas as pd
 import numpy as np
+import itertools
 import time
 
 class Bracket_Games:
@@ -16,14 +17,11 @@ class Bracket_Games:
         self.event_day_ids = Event_Day_Converter().event_day_ids()
 
     def final_bracket_lengths(self):
-        bracket_round_lengths = []
-        for event in self.bracket_round_lengths:
-            bracket_round_lengths.extend(event)
-        final_br_lengths = []
+        bracket_round_lengths = list(itertools.chain.from_iterable(self.bracket_round_lengths))
         for x in bracket_round_lengths:
             if x == 1 or x == 5:
                 x -= 1
-            final_br_lengths.append(int(x/2))
+        final_br_lengths = [int(x/2) for x in bracket_round_lengths]
         return final_br_lengths
 
     def event_bracket_lengths(self):
@@ -33,9 +31,7 @@ class Bracket_Games:
         return event_bracket_lengths
 
     def bracket_game_days(self):
-        full_bracket_gametimes = []
-        for event in self.bracket_datetimes:
-            full_bracket_gametimes.extend(event)
+        full_bracket_gametimes = list(itertools.chain.from_iterable(self.bracket_datetimes))
         bracket_game_days = []
         bracket_game_times = []
         for x, day in enumerate(full_bracket_gametimes):
@@ -65,15 +61,10 @@ class Bracket_Games:
         return event_day_ids
 
     def full_event_day_ids(self):
-        event_day_ids = []
-        for x, days in enumerate(self.bracket_days_by_event()):
-            for y, ids in enumerate(self.add_nulls_event_day_ids()):
-                if x == y:
-                    event_day_ids.append([k for day in days for k, v in ids.items() if day == v])
+        event_day_ids = [[k for day in days for k, v in ids.items() if day == v] for days, ids in zip(self.bracket_days_by_event(), self.add_nulls_event_day_ids())]
         event_day_ids[50].insert(11, 'null')
-        full_event_day_ids = []
-        for event in event_day_ids:
-            full_event_day_ids.extend(event)
+        full_event_day_ids_raw = list(itertools.chain.from_iterable(event_day_ids))
+        full_event_day_ids = [0 if x == 'null' else x for x in full_event_day_ids_raw]
         return full_event_day_ids
 
     def clean_bracket_teams(self):
@@ -100,18 +91,28 @@ class Bracket_Games:
         del bracket_scores_raw[6][22:26]
         del bracket_scores_raw[7][24:26]
         bracket_scores_raw[-3] = bracket_scores_raw[-3][:-2]
-        clean_bracket_scores = []
-        for event in bracket_scores_raw:
-            clean_bracket_scores.extend(event)
-        return clean_bracket_scores
+        bracket_scores = list(itertools.chain.from_iterable(bracket_scores_raw))
+        clean_bracket_scores = [0 if x == '' else x for x in bracket_scores]
+        full_bracket_scores = list(map(int, clean_bracket_scores))
+        return full_bracket_scores
 
     def bracket_types_raw(self):
-        full_bracket_types = []
-        for event in self.bracket_types:
-            full_bracket_types.extend(event)
+        full_bracket_types = list(itertools.chain.from_iterable(self.bracket_types))
         return full_bracket_types
 
     def bracket_types_clean(self):
+        '''
+        bracket_type_codes = {1: ['Championship Bracket', '1st Place Bracket', '1st Place', 'Semifinals', 'Championship', 'Bracket', '1v1', "Men's Champion", "Women's Champion"], 
+                              2: ['3rd Place', '3rd Place Bracket', '2v2', '3rd Place (both teams qualify for 2018 WUCC)', '3rd Place (2018 WUCC Qualifier)', '3rd Place Game'],
+                              3: ['5th Place Bracket', '5th Place', 'Pro Flight / 5th Place Bracket', '5th Place Bracket (Pro Flight)', '3v3', 'Pro Flight 5th Place', '5th Place Game', '5th Place Bracket - 1', '5th Place Bracket - 2'],
+                              4: ['7th Place', '7th Place Bracket', 'Pro Flight Play-In / 7th Place Bracket (A)', 'Pro Flight Play-In / 7th Place Bracket (B)', 'Pro Flight Play-In / 7th Place Bracket (1)', 'Pro Flight Play-In / 7th Place Bracket (2)', '4v4', '7th Place Game', 'Pro Flight Play-In Bracket', '7th Place Bracket -- Pro Flight Play-In (A)', '7th Place Bracket -- Pro Flight Play-In (B)', 'Pro Flight Qualification Bracket', 'Pro Flight Qualification'],
+                              5: ['9th Place Bracket', '9th Place', '9th Place (tie)', '5v5', '9th Place Finals'],
+                              6: ['11th Place', '11th Place Bracket', '11th Place Game', '6v6'],
+                              7: ['13th Place', '13th Place Bracket', '13th Place (tie)', '7v7'],
+                              8: ['15th Place', '15th place', '15th Place Game'],
+                              9: ['Crossover', 'Crossover Showcase', '5 vs 7 friendly', 'Saturday Friendly - 2pm', 'Sunday Friendly - 9:30am']}
+        bracket_types_clean = [btype_code if btype in btypes else 0 for btype in self.bracket_types_raw() for btype_code, btypes in bracket_type_codes.items()]
+        '''
         bracket_types_clean = []
         for btype in self.bracket_types_raw():
             if btype in ['Championship Bracket', '1st Place Bracket', '1st Place', 'Semifinals', 'Championship', 'Bracket', '1v1', "Men's Champion", "Women's Champion"]:
@@ -133,44 +134,30 @@ class Bracket_Games:
             elif btype in ['Crossover', 'Crossover Showcase', '5 vs 7 friendly', 'Saturday Friendly - 2pm', 'Sunday Friendly - 9:30am']:
                 bracket_types_clean.extend([9])
             else:
-                bracket_types_clean.extend(['Check'])
+                bracket_types_clean.extend([0])
         return bracket_types_clean
 
     def bracket_game_types(self):
-        bracket_game_types = []
-        for x in self.final_bracket_lengths():
-            if x == 1:
-                bracket_game_types.extend([1])
-            elif x == 2:
-                bracket_game_types.extend([2, 1])
-            elif x == 3:
-                bracket_game_types.extend([2, 2, 1])
-            elif x == 4:
-                bracket_game_types.extend([3, 3, 2, 1])
-            elif x == 5:
-                bracket_game_types.extend([3, 2, 3, 2, 1])
-            elif x == 6:
-                bracket_game_types.extend([3, 3, 2, 3, 2, 1])
-            elif x == 7:
-                bracket_game_types.extend([3, 3, 2, 3, 3, 2, 1])
-            elif x == 9:
-                bracket_game_types.extend([4, 3, 3, 2, 4, 3, 3, 2, 1])
-            elif x == 11:
-                bracket_game_types.extend([4, 3, 4, 3, 2, 4, 3, 4, 3, 2, 1])
-            elif x == 15:
-                bracket_game_types.extend([4, 4, 3, 4, 4, 3, 2, 4, 4, 3, 4, 4, 3, 2, 1])
-        return bracket_game_types
+        game_type_codes_by_length = {1: [1], 2: [2, 1], 3: [2, 2, 1], 4: [3, 3, 2, 1], 5: [3, 2, 3, 2, 1], 6: [3, 3, 2, 3, 2, 1], 7: [3, 3, 2, 3, 3, 2, 1], 9: [4, 3, 3, 2, 4, 3, 3, 2, 1], 11: [4, 3, 4, 3, 2, 4, 3, 4, 3, 2, 1], 15: [4, 4, 3, 4, 4, 3, 2, 4, 4, 3, 4, 4, 3, 2, 1]}
+        bracket_game_types = [v for x in self.final_bracket_lengths() for k, v in game_type_codes_by_length.items() if x == k]
+        full_bracket_game_types = list(itertools.chain.from_iterable(bracket_game_types))
+        return full_bracket_game_types
 
-    def bracket_games_df(self):
+    def bracket_games_df_main(self):
         columns = {'bracket_type_id': self.bracket_types_clean(),
                    'bracket_game_type_id': self.bracket_game_types(),
                    'event_day_id': self.full_event_day_ids(),
                    'game_time': self.bracket_game_days()[1],
                    'first_team_event_id': self.bracket_team_event_ids()[::2],
-                   'first_team_score': self.clean_bracket_scores()[::2],
-                   #'second_team_event_id': self.bracket_team_event_ids()[1::2]
-                   #'second_team_score': self.clean_bracket_scores()[1::2]
+                   'first_team_score': self.clean_bracket_scores()[::2]
                    }
+        bracket_games_df = pd.DataFrame(data=columns)
+        bracket_games_df.index += 1
+        return bracket_games_df
+    
+    def bracket_games_df_second(self):
+        columns = {'second_team_event_id': self.bracket_team_event_ids()[1::2],
+                   'second_team_score': self.clean_bracket_scores()[1::2]}
         bracket_games_df = pd.DataFrame(data=columns)
         bracket_games_df.index += 1
         return bracket_games_df
